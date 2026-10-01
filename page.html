@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TravelGo - Explore The World</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f5f7fa;
+            color: #222;
+        }
+
+        /* Navigation */
+        nav {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            padding: 20px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 10;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .logo span {
+            color: #00d4ff;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        nav ul li a:hover {
+            color: #00d4ff;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            min-height: 600px;
+            background:
+                linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)),
+                url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1600&q=80");
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 20px;
+        }
+
+        .hero-content h1 {
+            font-size: 60px;
+            margin-bottom: 20px;
+        }
+
+        .hero-content h1 span {
+            color: #00d4ff;
+        }
+
+        .hero-content p {
+            font-size: 20px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            background: #00a8cc;
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #007c91;
+            transform: translateY(-3px);
+        }
+
+        /* Search Box */
+        .search-box {
+            width: 85%;
+            max-width: 1000px;
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin: -60px auto 60px;
+            position: relative;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.15);
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .search-item {
+            flex: 1;
+            min-width: 180px;
+        }
+
+        .search-item label {
+            display: block;
+            font-size: 13px;
+            color: #777;
+            margin-bottom: 8px;
+        }
+
+        .search-item input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            outline: none;
+        }
+
+        .search-btn {
+            align-self: end;
+            padding: 13px 25px;
+            background: #00a8cc;
+            border: none;
+            color: white;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        /* Section */
+        .section {
+            padding: 60px 7%;
+            text-align: center;
+        }
+
+        .section h2 {
+            font-size: 38px;
+            margin-bottom: 10px;
+        }
+
+        .section > p {
+            color: #777;
+            margin-bottom: 40px;
+        }
+
+        /* Destination Cards */
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+        }
+
+        .card img {
+            width: 100%;
+            height: 230px;
+            object-fit: cover;
+        }
+
+        .card-content {
+            padding: 20px;
+            text-align: left;
+        }
+
+        .card-content h3 {
+            font-size: 23px;
+            margin-bottom: 8px;
+        }
+
+        .card-content p {
+            color: #777;
+            margin-bottom: 15px;
+        }
+
+        .price {
+            color: #00a8cc;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        /* Features */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .feature {
+            padding: 30px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+
+        .feature-icon {
+            font-size: 45px;
+            margin-bottom: 15px;
+        }
+
+        .feature h3 {
+            margin-bottom: 10px;
+        }
+
+        .feature p {
+            color: #777;
+            line-height: 1.5;
+        }
+
+        /* CTA */
+        .cta {
+            margin-top: 50px;
+            padding: 80px 20px;
+            background:
+                linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+                url("https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=1600&q=80");
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+        }
+
+        .cta h2 {
+            font-size: 42px;
+            margin-bottom: 15px;
+        }
+
+        .cta p {
+            margin-bottom: 25px;
+            font-size: 18px;
+        }
+
+        /* Footer */
+        footer {
+            background: #111827;
+            color: white;
+            text-align: center;
+            padding: 25px;
+        }
+
+        .auth-box {
+            max-width: 700px;
+            margin: 40px auto 0;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            padding: 25px;
+            text-align: left;
+        }
+
+        .auth-box h3 {
+            margin-bottom: 10px;
+            font-size: 26px;
+        }
+
+        .auth-box p {
+            color: #555;
+            margin-bottom: 18px;
+        }
+
+        .auth-status {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            background: #f3f8ff;
+            border-radius: 10px;
+            padding: 15px 18px;
+            border: 1px solid #dce9ff;
+        }
+
+        .status-pill {
+            background: #e8f7ef;
+            color: #166534;
+            padding: 6px 12px;
+            border-radius: 999px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .auth-box button {
+            margin-top: 18px;
+            background: #00a8cc;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 12px 18px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .login-card {
+            margin-top: 25px;
+            border: 1px solid #dfeaf8;
+            background: #f9fbff;
+            border-radius: 14px;
+            padding: 22px;
+        }
+
+        .login-card h4 {
+            margin-bottom: 18px;
+            font-size: 22px;
+        }
+
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-group label {
+            font-size: 14px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .form-group input {
+            padding: 12px 14px;
+            border: 1px solid #d3dfe9;
+            border-radius: 10px;
+            font-size: 16px;
+        }
+
+        .primary-btn, .google-btn {
+            border: none;
+            border-radius: 10px;
+            padding: 12px 18px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s ease;
+        }
+
+        .primary-btn {
+            background: #1f9dff;
+            color: white;
+        }
+
+        .primary-btn:hover, .google-btn:hover {
+            transform: translateY(-1px);
+        }
+
+        .google-btn {
+            background: #fff;
+            color: #1f2937;
+            border: 1px solid #dfe3e8;
+            margin-top: 10px;
+        }
+
+        .message {
+            min-height: 24px;
+            font-size: 14px;
+            margin-top: 4px;
+        }
+
+        .message.error {
+            color: #b42318;
+        }
+
+        .message.success {
+            color: #1f7a45;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .cards,
+            .features {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .hero-content h1 {
+                font-size: 45px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            nav {
+                padding: 15px 5%;
+            }
+
+            nav ul {
+                display: none;
+            }
+
+            .hero-content h1 {
+                font-size: 38px;
+            }
+
+            .hero-content p {
+                font-size: 16px;
+            }
+
+            .cards,
+            .features {
+                grid-template-columns: 1fr;
+            }
+
+            .search-box {
+                width: 90%;
+                margin-top: -40px;
+            }
+
+            .section h2 {
+                font-size: 30px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">Travel<span>Go</span></div>
+
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#destinations">Destinations</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Explore The <span>World</span></h1>
+
+            <p>
+                Discover beautiful destinations, unforgettable adventures,
+                and amazing experiences around the world.
+            </p>
+
+            <a href="#destinations" class="btn">Explore Now</a>
+        </div>
+    </section>
+
+    <!-- Search -->
+    <div class="search-box">
+
+        <div class="search-item">
+            <label>DESTINATION</label>
+            <input type="text" placeholder="Where do you want to go?">
+        </div>
+
+        <div class="search-item">
+            <label>CHECK IN</label>
+            <input type="date">
+        </div>
+
+        <div class="search-item">
+            <label>CHECK OUT</label>
+            <input type="date">
+        </div>
+
+        <button class="search-btn">Search</button>
+
+    </div>
+
+    <!-- Destinations -->
+    <section class="section" id="destinations">
+
+        <h2>Popular Destinations</h2>
+
+        <p>Discover some of the world's most beautiful places.</p>
+
+        <div class="cards">
+
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=800&q=80">
+
+                <div class="card-content">
+                    <h3>Bali, Indonesia</h3>
+                    <p>Beautiful beaches, temples and tropical adventures.</p>
+                    <div class="price">From ₹25,000</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=800&q=80">
+
+                <div class="card-content">
+                    <h3>Paris, France</h3>
+                    <p>Experience romance, culture and iconic landmarks.</p>
+                    <div class="price">From ₹45,000</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1518391846015-55a9cc003b25?auto=format&fit=crop&w=800&q=80">
+
+                <div class="card-content">
+                    <h3>Switzerland</h3>
+                    <p>Enjoy stunning mountains, lakes and peaceful views.</p>
+                    <div class="price">From ₹55,000</div>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- Services -->
+    <section class="section" id="services">
+
+        <h2>Why Choose TravelGo?</h2>
+
+        <p>Everything you need for a perfect journey.</p>
+
+        <div class="features">
+
+            <div class="feature">
+                <div class="feature-icon">✈️</div>
+                <h3>Easy Booking</h3>
+                <p>Book your flights and travel packages quickly and easily.</p>
+            </div>
+
+            <div class="feature">
+                <div class="feature-icon">🏨</div>
+                <h3>Best Hotels</h3>
+                <p>Stay at comfortable and highly-rated hotels around the world.</p>
+            </div>
+
+            <div class="feature">
+                <div class="feature-icon">🌍</div>
+                <h3>Great Experiences</h3>
+                <p>Create unforgettable memories with our travel experiences.</p>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- Call To Action -->
+    <section class="cta" id="contact">
+
+        <h2>Ready For Your Next Adventure?</h2>
+
+        <p>Start planning your dream vacation today.</p>
+
+        <a href="#" class="btn">Plan My Trip</a>
+
+    </section>
+
+    <section class="section" id="auth-check">
+        <div class="auth-box">
+            <h3>Authentication Check</h3>
+            <p>Sign in with your email/password or use your Google account.</p>
+            <div class="auth-status">
+                <strong id="auth-status-text">Checking...</strong>
+                <span class="status-pill" id="auth-state-pill">Pending</span>
+            </div>
+
+            <div class="login-card">
+                <h4>Login</h4>
+                <form class="login-form" id="login-form">
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input id="email" type="email" placeholder="your@email.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input id="password" type="password" placeholder="Enter your password" required>
+                    </div>
+
+                    <button class="primary-btn" type="submit">Sign In With Email</button>
+                    <button class="google-btn" type="button" id="google-signin">Continue with Google</button>
+                    <div id="auth-message" class="message" aria-live="polite"></div>
+                </form>
+            </div>
+
+            <button id="auth-action-btn" type="button">Sign Out</button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2026 TravelGo. All Rights Reserved.</p>
+    </footer>
+    <script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-analytics.js";
+  import {
+    getAuth,
+    onAuthStateChanged,
+    signInWithEmailAndPassword,
+    signInWithPopup,
+    GoogleAuthProvider,
+    signOut
+  } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyAfu09QH766gMx4YDB7UInyX3JVBV3DKuo",
+    authDomain: "student-management-e0f42.firebaseapp.com",
+    projectId: "student-management-e0f42",
+    storageBucket: "student-management-e0f42.firebasestorage.app",
+    messagingSenderId: "1040522708242",
+    appId: "1:1040522708242:web:b8bd4fda3cb3fad10c1fcb",
+    measurementId: "G-ZKHBNRXVR7"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+  const auth = getAuth(app);
+  const googleProvider = new GoogleAuthProvider();
+  const authStatusText = document.getElementById('auth-status-text');
+  const authStatePill = document.getElementById('auth-state-pill');
+  const authActionBtn = document.getElementById('auth-action-btn');
+  const loginForm = document.getElementById('login-form');
+  const authMessage = document.getElementById('auth-message');
+  const googleSignInBtn = document.getElementById('google-signin');
+
+  function setMessage(type, text) {
+    authMessage.className = `message ${type}`;
+    authMessage.textContent = text;
+  }
+
+  function updateAuthUI(user) {
+    if (user) {
+      const email = user.email || 'Google user';
+      authStatusText.textContent = `Authenticated as ${email}`;
+      authStatePill.textContent = 'Signed In';
+      authStatePill.style.background = '#e8f7ef';
+      authStatePill.style.color = '#166534';
+      authActionBtn.textContent = 'Sign Out';
+      authActionBtn.style.display = 'inline-block';
+      authActionBtn.onclick = () => signOut(auth).catch(console.error);
+      setMessage('success', 'You are signed in successfully.');
+    } else {
+      authStatusText.textContent = 'Not authenticated';
+      authStatePill.textContent = 'Signed Out';
+      authStatePill.style.background = '#fff4e5';
+      authStatePill.style.color = '#a16207';
+      authActionBtn.textContent = 'Sign Out';
+      authActionBtn.style.display = 'none';
+      setMessage('success', '');
+    }
+  }
+
+  loginForm.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const email = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value.trim();
+
+    if (!email || !password) {
+      setMessage('error', 'Please enter both email and password.');
+      return;
+    }
+
+    try {
+      setMessage('success', 'Signing in...');
+      await signInWithEmailAndPassword(auth, email, password);
+      loginForm.reset();
+      setMessage('success', 'Signed in with email successfully.');
+    } catch (error) {
+      setMessage('error', error.message || 'Email sign-in failed.');
+    }
+  });
+
+  googleSignInBtn.addEventListener('click', async () => {
+    try {
+      setMessage('success', 'Connecting to Google...');
+      await signInWithPopup(auth, googleProvider);
+      setMessage('success', 'Signed in with Google successfully.');
+    } catch (error) {
+      setMessage('error', error.message || 'Google sign-in failed.');
+    }
+  });
+
+  authActionBtn.onclick = () => signOut(auth).catch(console.error);
+
+  onAuthStateChanged(auth, (user) => {
+    updateAuthUI(user);
+  }, (error) => {
+    authStatusText.textContent = 'Authentication check failed';
+    authStatePill.textContent = 'Error';
+    setMessage('error', 'Authentication check failed.');
+    console.error('Firebase auth check error:', error);
+  });
+</script>
+
+</body>
+</html>
